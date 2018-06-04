@@ -69,7 +69,7 @@ document.getElementById('btn').addEventListener('click', function() {
         users.push(user);
         localStorage.a_users = JSON.stringify(users);
     } else {
-        alert("Please enter all information")
+        alert("Please enter all information!")
     }
 });
 
@@ -79,7 +79,6 @@ function getRadioBoxValue(radioName){
         if(obj[i].checked)
             return obj[i].value;
     }
-
     return "";
 }
 

@@ -4,57 +4,53 @@ if(localStorage.a_users) {
     document.getElementById("table").style.display = null;
     for(var i=0; i<users.length; i++){
         document.getElementById("table").innerHTML += "<tr>" + "<td>"+users[i].username+"</td>" + "<td>"+users[i].email+"</td>"
-        + "<td>"+users[i].location+"</td>" + "<td>"+users[i].company+"</td>" + "<td>"+users[i].gender+"</td>" + "</tr>";
+            + "<td>"+users[i].location+"</td>" + "<td>"+users[i].company+"</td>" + "<td>"+users[i].gender+"</td>" + "</tr>";
     }
+}
+
+function addOne() {
+    document.getElementById("table").insertAdjacentHTML('beforeend',
+        `<tr>
+            <td>${users[i].username}</td>
+            <td>${users[i].email}</td>
+            <td>${users[i].location}</td>
+            <td>${users[i].company}</td>
+            <td>${users[i].gender}</td>
+          </tr>`);
 }
 
 document.getElementById('btn').addEventListener('click', function() {
     var username=document.getElementById('uname').value;
+    document.querySelectorAll("p.err_msg").forEach(function (element) {
+        element.remove();
+    });
     if(username == ""){
-        // document.getElementById("c1").innerHTML="Please enter username";
-        document.getElementById("err_msg_usrname").innerHTML = '<p style="color: red">Please enter username</p>';
-    } else{
-        document.getElementById("err_msg_usrname").innerHTML="";
+        document.getElementById("uname").insertAdjacentHTML('afterend','<p class="err_msg" id="err_uname" style="color: red">Please enter username</p>') ;
     }
 
     var password=document.getElementById('pwd').value;
     if(password == ""){
-        // document.getElementById("c2").innerHTML="Please enter password";
-        document.getElementById("err_msg_pwd").innerHTML = '<p style="color: red">Please enter password</p>';
-    } else{
-        document.getElementById("err_msg_pwd").innerHTML="";
+        document.getElementById("pwd").insertAdjacentHTML('afterend','<p class="err_msg" id="err_pwd" style="color: red">Please enter password</p>') ;
     }
 
     var email=document.getElementById('email').value;
     if(email == ""){
-        // document.getElementById("c3").innerHTML="Please enter email";
-        document.getElementById("err_msg_email").innerHTML = '<p style="color: red">Please enter email</p>';
-    } else{
-        document.getElementById("err_msg_email").innerHTML="";
+        document.getElementById("email").insertAdjacentHTML('afterend','<p class="err_msg" id="err_email" style="color: red">Please enter email</p>') ;
     }
 
     var location=document.getElementById('loc').value;
     if(location == ""){
-        // document.getElementById("c4").innerHTML="Please enter location";
-        document.getElementById("err_msg_loc").innerHTML = '<p style="color: red">Please enter location</p>';
-    } else{
-        document.getElementById("err_msg_loc").innerHTML="";
+        document.getElementById("loc").insertAdjacentHTML('afterend','<p class="err_msg" id="err_loc" style="color: red">Please enter location</p>') ;
     }
 
     var company=document.getElementById('cmpy').value;
     if(company == ""){
-        // document.getElementById("c5").innerHTML="Please enter company";
-        document.getElementById("err_msg_cmpy").innerHTML = '<p style="color: red">Please enter company</p>';
-    } else{
-        document.getElementById("err_msg_cmpy").innerHTML="";
+        document.getElementById("cmpy").insertAdjacentHTML('afterend','<p class="err_msg" id="err_cmpy" style="color: red">Please enter company</p>') ;
     }
 
     var gender=getRadioBoxValue('gender');
     if(gender == ""){
-        // document.getElementById("c6").innerHTML="Please select gender";
-        document.getElementById("err_msg_gender").innerHTML = '<p style="color: red">Please select gender</p>';
-    } else{
-        document.getElementById("err_msg_gender").innerHTML="";
+        document.getElementById("gender").insertAdjacentHTML('afterend','<p class="err_msg" id="err_gender" style="color: red">Please enter gender</p>') ;
     }
 
     if(username!="" && password!="" && email!="" && location!="" && company!="" && gender!=""){
@@ -68,8 +64,7 @@ document.getElementById('btn').addEventListener('click', function() {
         };
         users.push(user);
         localStorage.a_users = JSON.stringify(users);
-    } else {
-        alert("Please enter all information!")
+        addOne();
     }
 });
 
